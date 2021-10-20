@@ -1,0 +1,776 @@
+
+# INTRODUCCION A DOCKER
+# PRACTICA MARGERYS SALGADO
+# EJECUTADO COMO ADMINISTRADOR
+
+## TESTING DOCKER
+
+Microsoft Windows [Version 10.0.19043.1288]
+(c) Microsoft Corporation. All rights reserved.
+
+
+## PRIMER CONTENEDOR
+
+C:\Windows\system32>docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+## SEGUNDO CONTENEDOR
+
+C:\Windows\system32>docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+Digest: sha256:f7ca5a32c10d51aeda3b4d01c61c6061f497893d7f6628b92f822f7117182a57
+Status: Image is up to date for busybox:latest
+docker.io/library/busybox:latest
+
+
+## CHECKING IMAGES
+
+C:\Windows\system32>docker images
+REPOSITORY              TAG       IMAGE ID       CREATED       SIZE
+mysql                   5.7.35    8a8a506ccfdc   7 days ago    448MB
+jupyter/base-notebook   latest    f14b646c836f   8 days ago    668MB
+hello-world             latest    feb5d9fea6a5   3 weeks ago   13.3kB
+busybox                 latest    16ea53ea7c65   5 weeks ago   1.24MB
+
+
+## RUNNING SECOND CONTAINER
+
+C:\Windows\system32>docker run busybox
+
+
+## RUNNING WITH EXTRA PARAMETERS
+
+C:\Windows\system32>docker run busybox echo "Hola Margerys"
+Hola Margerys
+
+
+## CHECKING RUNNING CONTAINERS
+
+C:\Windows\system32>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Windows\system32>docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED         STATUS                     PORTS     NAMES
+330d2d6f37eb   busybox                 "echo 'Hola Margerys'"   4 minutes ago   Exited (0) 4 minutes ago             distracted_poitras
+970057205c14   busybox                 "sh"                     5 minutes ago   Exited (0) 5 minutes ago             vigilant_antonelli
+6fedb23b27b2   hello-world             "/hello"                 2 hours ago     Exited (0) 2 hours ago               naughty_haibt
+da8d1713c051   hello-world             "/hello"                 2 hours ago     Exited (0) 2 hours ago               recursing_satoshi
+34744a7d08c6   hello-world             "/hello"                 3 hours ago     Exited (0) 3 hours ago               youthful_cori
+0faa953d1468   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Created                              charming_sanderson
+eade5eb57345   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Created                              affectionate_poincare
+446eb6ac258e   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Created                              busy_shamir
+47b5d7988081   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Exited (0) 4 days ago                focused_perlman
+c8ea1af4943e   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Created                              xenodochial_bohr
+8357c9b1919e   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Created                              zen_boyd
+066f8c38be9d   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Created                              frosty_booth
+c9b12d1c11e0   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago      Exited (0) 4 days ago                beautiful_bartik
+0de2be8f1623   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago      Exited (0) 4 days ago                agitated_rhodes
+19b7a2d73d08   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago      Created                              festive_bhaskara
+c74ddced6e1b   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago      Exited (0) 4 days ago                happy_wilbur
+beee67dcb39c   busybox                 "sh"                     4 days ago      Exited (2) 4 days ago                friendly_faraday
+faaac340c76f   busybox                 "echo 'Hello From Ga…"   4 days ago      Exited (0) 4 days ago                festive_mestorf
+d857cd349d0f   busybox                 "sh"                     4 days ago      Exited (0) 4 days ago                upbeat_meninsky
+1450449f3e18   hello-world             "/hello"                 4 days ago      Exited (0) 4 days ago                elegant_allen
+01ffc7dd80e9   hello-world             "/hello"                 5 days ago      Exited (0) 5 days ago                charming_pasteur
+
+
+## RUN AND GET INSIDE THE CONTAINERS
+
+## EJECUTAR EN CONTENEDOR DENTRO DE LA CONSOLA
+
+C:\Windows\system32>docker run -it busybox sh
+/ # ls
+bin   dev   etc   home  proc  root  sys   tmp   usr   var
+/ # uptime
+ 17:29:37 up  3:30,  0 users,  load average: 0.00, 0.00, 0.67
+/ # cd home/
+/home # ls
+/home # cd
+~ # cd..
+sh: cd..: not found
+~ # cd
+~ # cd ..
+/ # cd var/
+/var # ls
+spool  www
+/var # cd
+~ # clear
+~ # exit
+
+
+## VERIFICAR EL ULTIMO CONTENERDOR CORRIDO
+
+C:\Windows\system32>docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS     NAMES
+085c005a4aff   busybox                 "sh"                     5 minutes ago    Exited (0) 31 seconds ago             lucid_chatelet
+
+
+## DELETE CONTAINERS
+Nota: se relizo el ejercicio en clases y mostraba un error cuando se realizaba la conexion con Mysql. Por lo tanto se realiza nuevamente el ejercico y en este punto se eliminaron los contenedores fallidos, para proceder a realizar el ejercicion nuevamente.
+
+C:\Windows\system32>docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS     NAMES
+085c005a4aff   busybox                 "sh"                     5 minutes ago    Exited (0) 31 seconds ago             lucid_chatelet
+330d2d6f37eb   busybox                 "echo 'Hola Margerys'"   15 minutes ago   Exited (0) 15 minutes ago             distracted_poitras
+970057205c14   busybox                 "sh"                     15 minutes ago   Exited (0) 15 minutes ago             vigilant_antonelli
+6fedb23b27b2   hello-world             "/hello"                 2 hours ago      Exited (0) 2 hours ago                naughty_haibt
+da8d1713c051   hello-world             "/hello"                 2 hours ago      Exited (0) 2 hours ago                recursing_satoshi
+34744a7d08c6   hello-world             "/hello"                 3 hours ago      Exited (0) 3 hours ago                youthful_cori
+0faa953d1468   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Created                               charming_sanderson
+eade5eb57345   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Created                               affectionate_poincare
+446eb6ac258e   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Created                               busy_shamir
+47b5d7988081   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Exited (0) 4 days ago                 focused_perlman
+c8ea1af4943e   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Created                               xenodochial_bohr
+8357c9b1919e   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Created                               zen_boyd
+066f8c38be9d   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Created                               frosty_booth
+c9b12d1c11e0   mysql:5.7.35            "docker-entrypoint.s…"   4 days ago       Exited (0) 4 days ago                 beautiful_bartik
+0de2be8f1623   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago       Exited (0) 4 days ago                 agitated_rhodes
+19b7a2d73d08   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago       Created                               festive_bhaskara
+c74ddced6e1b   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago       Exited (0) 4 days ago                 happy_wilbur
+beee67dcb39c   busybox                 "sh"                     4 days ago       Exited (2) 4 days ago                 friendly_faraday
+faaac340c76f   busybox                 "echo 'Hello From Ga…"   4 days ago       Exited (0) 4 days ago                 festive_mestorf
+d857cd349d0f   busybox                 "sh"                     4 days ago       Exited (0) 4 days ago                 upbeat_meninsky
+1450449f3e18   hello-world             "/hello"                 4 days ago       Exited (0) 4 days ago                 elegant_allen
+01ffc7dd80e9   hello-world             "/hello"                 5 days ago       Exited (0) 5 days ago                 charming_pasteur
+
+C:\Windows\system32>docker rm 0faa953d1468 eade5eb57345 446eb6ac258e 47b5d7988081 c8ea1af4943e 8357c9b1919e 066f8c38be9d c9b12d1c11e0
+0faa953d1468
+eade5eb57345
+446eb6ac258e
+47b5d7988081
+c8ea1af4943e
+8357c9b1919e
+066f8c38be9d
+c9b12d1c11e0
+
+
+## COMPROBACION
+
+C:\Windows\system32>docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                      PORTS     NAMES
+085c005a4aff   busybox                 "sh"                     15 minutes ago   Exited (0) 9 minutes ago              lucid_chatelet
+330d2d6f37eb   busybox                 "echo 'Hola Margerys'"   24 minutes ago   Exited (0) 24 minutes ago             distracted_poitras
+970057205c14   busybox                 "sh"                     25 minutes ago   Exited (0) 25 minutes ago             vigilant_antonelli
+6fedb23b27b2   hello-world             "/hello"                 2 hours ago      Exited (0) 2 hours ago                naughty_haibt
+da8d1713c051   hello-world             "/hello"                 2 hours ago      Exited (0) 2 hours ago                recursing_satoshi
+34744a7d08c6   hello-world             "/hello"                 3 hours ago      Exited (0) 3 hours ago                youthful_cori
+0de2be8f1623   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago       Exited (0) 4 days ago                 agitated_rhodes
+19b7a2d73d08   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago       Created                               festive_bhaskara
+c74ddced6e1b   jupyter/base-notebook   "tini -g -- start-no…"   4 days ago       Exited (0) 4 days ago                 happy_wilbur
+beee67dcb39c   busybox                 "sh"                     4 days ago       Exited (2) 4 days ago                 friendly_faraday
+faaac340c76f   busybox                 "echo 'Hello From Ga…"   4 days ago       Exited (0) 4 days ago                 festive_mestorf
+d857cd349d0f   busybox                 "sh"                     4 days ago       Exited (0) 4 days ago                 upbeat_meninsky
+1450449f3e18   hello-world             "/hello"                 4 days ago       Exited (0) 4 days ago                 elegant_allen
+01ffc7dd80e9   hello-world             "/hello"                 5 days ago       Exited (0) 5 days ago                 charming_pasteur
+
+
+## DOCKER AND PYTHON
+
+## INSTALL JUPYTER
+
+C:\Windows\system32>docker pull jupyter/base-notebook
+Using default tag: latest
+latest: Pulling from jupyter/base-notebook
+7b1a6ab2e44d: Pull complete
+392a878eec6b: Pull complete
+dde1fa497bf5: Pull complete
+9616edd90194: Pull complete
+bbb1a4bc9d68: Pull complete
+deaf0ecf3c73: Pull complete
+0e8c9d924ea1: Pull complete
+efd43a977977: Pull complete
+2d53f8fc7117: Pull complete
+b4fc3845e346: Pull complete
+ee1b4ffdac09: Pull complete
+Digest: sha256:b31e71a1055a8a7d2e3fda9f12ae234fc128b7d1d123379b9866b09193a6772f
+Status: Downloaded newer image for jupyter/base-notebook:latest
+docker.io/jupyter/base-notebook:latest
+
+
+## MAPEO DE PUERTOS
+## RUN JUPYTER
+
+C:\Windows\system32>docker run -p 8888:8888 jupyter/base-notebook
+WARN: Jupyter Notebook deprecation notice https://github.com/jupyter/docker-stacks#jupyter-notebook-deprecation-notice.
+Executing the command: jupyter notebook
+[I 17:56:07.541 NotebookApp] Writing notebook server cookie secret to /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret
+[W 2021-10-19 17:56:08.035 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-10-19 17:56:08.035 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-10-19 17:56:08.035 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-10-19 17:56:08.035 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[I 2021-10-19 17:56:08.043 LabApp] JupyterLab extension loaded from /opt/conda/lib/python3.9/site-packages/jupyterlab
+[I 2021-10-19 17:56:08.043 LabApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 17:56:08.048 NotebookApp] Serving notebooks from local directory: /home/jovyan
+[I 17:56:08.048 NotebookApp] Jupyter Notebook 6.4.4 is running at:
+[I 17:56:08.048 NotebookApp] http://ee8c8551901b:8888/?token=8701171f7d10485f96c7df8a75c2a9b5f3f0153302d14ed7
+[I 17:56:08.048 NotebookApp]  or http://127.0.0.1:8888/?token=8701171f7d10485f96c7df8a75c2a9b5f3f0153302d14ed7
+[I 17:56:08.048 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 17:56:08.053 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///home/jovyan/.local/share/jupyter/runtime/nbserver-7-open.html
+    Or copy and paste one of these URLs:
+        http://ee8c8551901b:8888/?token=8701171f7d10485f96c7df8a75c2a9b5f3f0153302d14ed7
+     or http://127.0.0.1:8888/?token=8701171f7d10485f96c7df8a75c2a9b5f3f0153302d14ed7
+
+## TOKEN: 8701171f7d10485f96c7df8a75c2a9b5f3f0153302d14ed7
+
+
+## REVISAR DESDE OTRA TERMINAL
+
+C:\Windows\system32>docker ps
+CONTAINER ID   IMAGE                   COMMAND                  CREATED         STATUS         PORTS                    NAMES
+ee8c8551901b   jupyter/base-notebook   "tini -g -- start-no…"   6 minutes ago   Up 6 minutes   0.0.0.0:8888->8888/tcp   agitated_knuth
+
+
+## MAPEAR PUERTO SOBRE UNO PUERTO YA EXISTENTE
+
+C:\Windows\system32>docker run -p 8888:8888 jupyter/base-notebook
+docker: Error response from daemon: driver failed programming external connectivity on endpoint blissful_carson (0d780f3d312df5ce059a74e19059c4a3f4a05482f604b6dd45ad9a0f0b040f01): Bind for 0.0.0.0:8888 failed: port is already allocated.
+
+
+## CORRECION DEL ERROR
+DERECHO PUERTO DEL CONTENEDOR
+IZQUIERDO PUERTO DE LA MAQUINA QUE UTILIZAMOS
+
+C:\Windows\system32>docker run -p 8889:8888 jupyter/base-notebook
+
+
+## VERIFICACION DE LOS CONTENEDORES MAPEADOS
+
+C:\Windows\system32>docker ps
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS          PORTS                    NAMES
+5ae5fa902514   jupyter/base-notebook   "tini -g -- start-no…"   28 seconds ago   Up 27 seconds   0.0.0.0:8889->8888/tcp   quirky_ramanujan
+ee8c8551901b   jupyter/base-notebook   "tini -g -- start-no…"   14 minutes ago   Up 14 minutes   0.0.0.0:8888->8888/tcp   agitated_knuth
+
+## DETERNER LOS CONTENEDORES
+
+docker stop <nombre o conteiner id>
+
+
+## CREATE A NETWORK
+## En el primer ejercicio se creo la red "my_test_network" y se procedio a crear la siguiente " my_another_network"
+C:\Windows\system32>docker network create --driver bridge my_test_network
+Error response from daemon: network with name my_test_network already exists
+
+C:\Windows\system32>docker network create --driver bridge my_another_network
+b837e3ca5a753b814293a153ed61a081867d0e015ec1f24939534d3cb5677a14
+
+
+## EJECUTAR CONTENEDOR DE MYSQL
+
+docker run -it --network my_another_network -e "MYSQL_ROOT_PASSWORD=root123" -e "MYSQL_DATABASE=test" -e "MYSQL_USER=test" -e "MYSQL_PASSWORD=test123" mysql:5.7.35
+
+2021-10-19 18:30:59+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.35-1debian10 started.
+2021-10-19 18:30:59+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-10-19 18:30:59+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.35-1debian10 started.
+2021-10-19 18:30:59+00:00 [Note] [Entrypoint]: Initializing database files
+2021-10-19T18:30:59.548451Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2021-10-19T18:30:59.665028Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2021-10-19T18:30:59.696281Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2021-10-19T18:30:59.704673Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: b4f53935-310a-11ec-b08c-0242ac130002.
+2021-10-19T18:30:59.707009Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2021-10-19T18:31:00.280544Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:31:00.280587Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:31:00.281074Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-10-19T18:31:00.577814Z 1 [Warning] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2021-10-19 18:31:02+00:00 [Note] [Entrypoint]: Database files initialized
+2021-10-19 18:31:02+00:00 [Note] [Entrypoint]: Starting temporary server
+2021-10-19 18:31:02+00:00 [Note] [Entrypoint]: Waiting for server startup
+2021-10-19T18:31:02.805001Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2021-10-19T18:31:02.806291Z 0 [Note] mysqld (mysqld 5.7.35) starting as process 78 ...
+2021-10-19T18:31:02.808592Z 0 [Note] InnoDB: PUNCH HOLE support available
+2021-10-19T18:31:02.808619Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2021-10-19T18:31:02.808623Z 0 [Note] InnoDB: Uses event mutexes
+2021-10-19T18:31:02.808625Z 0 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+2021-10-19T18:31:02.808627Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2021-10-19T18:31:02.808628Z 0 [Note] InnoDB: Using Linux native AIO
+2021-10-19T18:31:02.808828Z 0 [Note] InnoDB: Number of pools: 1
+2021-10-19T18:31:02.808991Z 0 [Note] InnoDB: Using CPU crc32 instructions
+2021-10-19T18:31:02.811304Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2021-10-19T18:31:02.819284Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2021-10-19T18:31:02.821694Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2021-10-19T18:31:02.833509Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2021-10-19T18:31:02.849885Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables2021-10-19T18:31:02.849939Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2021-10-19T18:31:02.863214Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2021-10-19T18:31:02.863534Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2021-10-19T18:31:02.863577Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2021-10-19T18:31:02.864828Z 0 [Note] InnoDB: 5.7.35 started; log sequence number 2748441
+2021-10-19T18:31:02.865058Z 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2021-10-19T18:31:02.865216Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2021-10-19T18:31:02.866858Z 0 [Note] InnoDB: Buffer pool(s) load completed at 211019 18:31:02
+2021-10-19T18:31:02.870546Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+2021-10-19T18:31:02.870575Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+2021-10-19T18:31:02.870596Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:31:02.870612Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:31:02.871051Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-10-19T18:31:02.871086Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+2021-10-19T18:31:02.874859Z 0 [Warning] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2021-10-19T18:31:02.879030Z 0 [Note] Event Scheduler: Loaded 0 events
+2021-10-19T18:31:02.879459Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.35'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server (GPL)
+2021-10-19 18:31:03+00:00 [Note] [Entrypoint]: Temporary server started.
+Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+2021-10-19 18:31:05+00:00 [Note] [Entrypoint]: Creating database test
+2021-10-19 18:31:05+00:00 [Note] [Entrypoint]: Creating user test
+2021-10-19 18:31:05+00:00 [Note] [Entrypoint]: Giving user test access to schema test
+
+2021-10-19 18:31:05+00:00 [Note] [Entrypoint]: Stopping temporary server
+2021-10-19T18:31:05.157524Z 0 [Note] Giving 0 client threads a chance to die gracefully
+2021-10-19T18:31:05.157556Z 0 [Note] Shutting down slave threads
+2021-10-19T18:31:05.157560Z 0 [Note] Forcefully disconnecting 0 remaining clients
+2021-10-19T18:31:05.157564Z 0 [Note] Event Scheduler: Purging the queue. 0 events
+2021-10-19T18:31:05.158023Z 0 [Note] Binlog end
+2021-10-19T18:31:05.158641Z 0 [Note] Shutting down plugin 'ngram'
+2021-10-19T18:31:05.158661Z 0 [Note] Shutting down plugin 'partition'
+2021-10-19T18:31:05.158664Z 0 [Note] Shutting down plugin 'BLACKHOLE'
+2021-10-19T18:31:05.158680Z 0 [Note] Shutting down plugin 'ARCHIVE'
+2021-10-19T18:31:05.158731Z 0 [Note] Shutting down plugin 'PERFORMANCE_SCHEMA'
+2021-10-19T18:31:05.158763Z 0 [Note] Shutting down plugin 'MRG_MYISAM'
+2021-10-19T18:31:05.158782Z 0 [Note] Shutting down plugin 'MyISAM'
+2021-10-19T18:31:05.158789Z 0 [Note] Shutting down plugin 'INNODB_SYS_VIRTUAL'
+2021-10-19T18:31:05.158791Z 0 [Note] Shutting down plugin 'INNODB_SYS_DATAFILES'
+2021-10-19T18:31:05.158793Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLESPACES'
+2021-10-19T18:31:05.158794Z 0 [Note] Shutting down plugin 'INNODB_SYS_FOREIGN_COLS'
+2021-10-19T18:31:05.158795Z 0 [Note] Shutting down plugin 'INNODB_SYS_FOREIGN'
+2021-10-19T18:31:05.158796Z 0 [Note] Shutting down plugin 'INNODB_SYS_FIELDS'
+2021-10-19T18:31:05.158797Z 0 [Note] Shutting down plugin 'INNODB_SYS_COLUMNS'
+2021-10-19T18:31:05.158799Z 0 [Note] Shutting down plugin 'INNODB_SYS_INDEXES'
+2021-10-19T18:31:05.158802Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLESTATS'
+2021-10-19T18:31:05.158803Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLES'
+2021-10-19T18:31:05.158805Z 0 [Note] Shutting down plugin 'INNODB_FT_INDEX_TABLE'
+2021-10-19T18:31:05.158807Z 0 [Note] Shutting down plugin 'INNODB_FT_INDEX_CACHE'
+2021-10-19T18:31:05.158808Z 0 [Note] Shutting down plugin 'INNODB_FT_CONFIG'
+2021-10-19T18:31:05.158810Z 0 [Note] Shutting down plugin 'INNODB_FT_BEING_DELETED'
+2021-10-19T18:31:05.158812Z 0 [Note] Shutting down plugin 'INNODB_FT_DELETED'
+2021-10-19T18:31:05.158814Z 0 [Note] Shutting down plugin 'INNODB_FT_DEFAULT_STOPWORD'
+2021-10-19T18:31:05.158815Z 0 [Note] Shutting down plugin 'INNODB_METRICS'
+2021-10-19T18:31:05.158817Z 0 [Note] Shutting down plugin 'INNODB_TEMP_TABLE_INFO'
+2021-10-19T18:31:05.158819Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_POOL_STATS'
+2021-10-19T18:31:05.158820Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_PAGE_LRU'
+2021-10-19T18:31:05.158837Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_PAGE'
+2021-10-19T18:31:05.158838Z 0 [Note] Shutting down plugin 'INNODB_CMP_PER_INDEX_RESET'
+2021-10-19T18:31:05.158839Z 0 [Note] Shutting down plugin 'INNODB_CMP_PER_INDEX'
+2021-10-19T18:31:05.158840Z 0 [Note] Shutting down plugin 'INNODB_CMPMEM_RESET'
+2021-10-19T18:31:05.158841Z 0 [Note] Shutting down plugin 'INNODB_CMPMEM'
+2021-10-19T18:31:05.158842Z 0 [Note] Shutting down plugin 'INNODB_CMP_RESET'
+2021-10-19T18:31:05.158843Z 0 [Note] Shutting down plugin 'INNODB_CMP'
+2021-10-19T18:31:05.158844Z 0 [Note] Shutting down plugin 'INNODB_LOCK_WAITS'
+2021-10-19T18:31:05.158867Z 0 [Note] Shutting down plugin 'INNODB_LOCKS'
+2021-10-19T18:31:05.158869Z 0 [Note] Shutting down plugin 'INNODB_TRX'
+2021-10-19T18:31:05.158872Z 0 [Note] Shutting down plugin 'InnoDB'
+2021-10-19T18:31:05.158957Z 0 [Note] InnoDB: FTS optimize thread exiting.
+2021-10-19T18:31:05.159105Z 0 [Note] InnoDB: Starting shutdown...
+2021-10-19T18:31:05.259519Z 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2021-10-19T18:31:05.259688Z 0 [Note] InnoDB: Buffer pool(s) dump completed at 211019 18:31:05
+2021-10-19T18:31:06.900424Z 0 [Note] InnoDB: Shutdown completed; log sequence number 12658916
+2021-10-19T18:31:06.902256Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2021-10-19T18:31:06.902296Z 0 [Note] Shutting down plugin 'MEMORY'
+2021-10-19T18:31:06.902303Z 0 [Note] Shutting down plugin 'CSV'
+2021-10-19T18:31:06.902307Z 0 [Note] Shutting down plugin 'sha256_password'
+2021-10-19T18:31:06.902309Z 0 [Note] Shutting down plugin 'mysql_native_password'
+2021-10-19T18:31:06.902448Z 0 [Note] Shutting down plugin 'binlog'
+2021-10-19T18:31:06.902917Z 0 [Note] mysqld: Shutdown complete
+
+2021-10-19 18:31:07+00:00 [Note] [Entrypoint]: Temporary server stopped
+
+2021-10-19 18:31:07+00:00 [Note] [Entrypoint]: MySQL init process done. Ready for start up.
+
+2021-10-19T18:31:07.312495Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2021-10-19T18:31:07.313312Z 0 [Note] mysqld (mysqld 5.7.35) starting as process 1 ...
+2021-10-19T18:31:07.315087Z 0 [Note] InnoDB: PUNCH HOLE support available
+2021-10-19T18:31:07.315113Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2021-10-19T18:31:07.315176Z 0 [Note] InnoDB: Uses event mutexes
+2021-10-19T18:31:07.315180Z 0 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+2021-10-19T18:31:07.315197Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2021-10-19T18:31:07.315229Z 0 [Note] InnoDB: Using Linux native AIO
+2021-10-19T18:31:07.315409Z 0 [Note] InnoDB: Number of pools: 1
+2021-10-19T18:31:07.315509Z 0 [Note] InnoDB: Using CPU crc32 instructions
+2021-10-19T18:31:07.316801Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2021-10-19T18:31:07.322768Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2021-10-19T18:31:07.324535Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2021-10-19T18:31:07.335836Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2021-10-19T18:31:07.353299Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables2021-10-19T18:31:07.353355Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2021-10-19T18:31:07.364039Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2021-10-19T18:31:07.364372Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2021-10-19T18:31:07.364393Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2021-10-19T18:31:07.365107Z 0 [Note] InnoDB: 5.7.35 started; log sequence number 12658916
+2021-10-19T18:31:07.365256Z 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2021-10-19T18:31:07.365430Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2021-10-19T18:31:07.366917Z 0 [Note] InnoDB: Buffer pool(s) load completed at 211019 18:31:07
+2021-10-19T18:31:07.368890Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+2021-10-19T18:31:07.368916Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+2021-10-19T18:31:07.368921Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:31:07.368936Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:31:07.369280Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-10-19T18:31:07.369333Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+2021-10-19T18:31:07.369656Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2021-10-19T18:31:07.369694Z 0 [Note] IPv6 is available.
+2021-10-19T18:31:07.369718Z 0 [Note]   - '::' resolves to '::';
+2021-10-19T18:31:07.369745Z 0 [Note] Server socket created on IP: '::'.
+2021-10-19T18:31:07.372207Z 0 [Warning] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2021-10-19T18:31:07.376385Z 0 [Note] Event Scheduler: Loaded 0 events
+2021-10-19T18:31:07.376629Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.35'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+
+
+## COMPROBACION QUE SE ESTA EJECUTANDO LA RED
+
+C:\Windows\system32>docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS              PORTS                 NAMES
+d45144992e50   mysql:5.7.35   "docker-entrypoint.s…"   2 minutes ago   Up About a minute   3306/tcp, 33060/tcp   focused_ishizaka
+
+## MAPEAR EL PUERTO PARA SQL
+
+C:\Windows\system32>docker run -it --network my_another_network -e "MYSQL_ROOT_PASSWORD=root123" -e "MYSQL_DATABASE=test" -e "MYSQL_USER=test" -e "MYSQL_PASSWORD=test123" -p 3306:3306 mysql:5.7.35
+docker: Error response from daemon: Ports are not available: listen tcp 0.0.0.0:3306: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+
+## SEGUN INFORMACION DE INTERNET PARA CORREGIR ERRO PODIA CAMBIAR EL PUERTO DE MI MAQUINA DE 3306 A 3366, ASI SE CORRIGIO
+
+C:\Windows\system32>docker run -it --network my_another_network -e "MYSQL_ROOT_PASSWORD=root123" -e "MYSQL_DATABASE=test" -e "MYSQL_USER=test" -e "MYSQL_PASSWORD=test123" -p 3366:3306 mysql:5.7.35
+
+2021-10-19 18:44:12+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.35-1debian10 started.
+2021-10-19 18:44:12+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-10-19 18:44:12+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.35-1debian10 started.
+2021-10-19 18:44:12+00:00 [Note] [Entrypoint]: Initializing database files
+2021-10-19T18:44:12.302466Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2021-10-19T18:44:12.405598Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2021-10-19T18:44:12.430490Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2021-10-19T18:44:12.438580Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 8d76d1be-310c-11ec-8c61-0242ac130002.
+2021-10-19T18:44:12.440492Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2021-10-19T18:44:13.127791Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:44:13.127817Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:44:13.128131Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-10-19T18:44:13.287927Z 1 [Warning] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2021-10-19 18:44:15+00:00 [Note] [Entrypoint]: Database files initialized
+2021-10-19 18:44:15+00:00 [Note] [Entrypoint]: Starting temporary server
+2021-10-19 18:44:15+00:00 [Note] [Entrypoint]: Waiting for server startup
+2021-10-19T18:44:15.555984Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2021-10-19T18:44:15.557712Z 0 [Note] mysqld (mysqld 5.7.35) starting as process 77 ...
+2021-10-19T18:44:15.560415Z 0 [Note] InnoDB: PUNCH HOLE support available
+2021-10-19T18:44:15.560519Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2021-10-19T18:44:15.560537Z 0 [Note] InnoDB: Uses event mutexes
+2021-10-19T18:44:15.560553Z 0 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+2021-10-19T18:44:15.560556Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2021-10-19T18:44:15.560559Z 0 [Note] InnoDB: Using Linux native AIO
+2021-10-19T18:44:15.560808Z 0 [Note] InnoDB: Number of pools: 1
+2021-10-19T18:44:15.560927Z 0 [Note] InnoDB: Using CPU crc32 instructions
+2021-10-19T18:44:15.562545Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2021-10-19T18:44:15.570352Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2021-10-19T18:44:15.573175Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2021-10-19T18:44:15.584842Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2021-10-19T18:44:15.603603Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2021-10-19T18:44:15.603663Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2021-10-19T18:44:15.623953Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2021-10-19T18:44:15.624550Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2021-10-19T18:44:15.624590Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2021-10-19T18:44:15.625872Z 0 [Note] InnoDB: 5.7.35 started; log sequence number 2748441
+2021-10-19T18:44:15.626067Z 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2021-10-19T18:44:15.626330Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2021-10-19T18:44:15.628376Z 0 [Note] InnoDB: Buffer pool(s) load completed at 211019 18:44:15
+2021-10-19T18:44:15.635045Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+2021-10-19T18:44:15.635136Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+2021-10-19T18:44:15.635163Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:44:15.635191Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:44:15.635733Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-10-19T18:44:15.635811Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+2021-10-19T18:44:15.640458Z 0 [Warning] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2021-10-19T18:44:15.646467Z 0 [Note] Event Scheduler: Loaded 0 events
+2021-10-19T18:44:15.646810Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.35'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server (GPL)
+2021-10-19 18:44:16+00:00 [Note] [Entrypoint]: Temporary server started.
+Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
+Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
+2021-10-19 18:44:17+00:00 [Note] [Entrypoint]: Creating database test
+2021-10-19 18:44:17+00:00 [Note] [Entrypoint]: Creating user test
+2021-10-19 18:44:17+00:00 [Note] [Entrypoint]: Giving user test access to schema test
+
+2021-10-19 18:44:17+00:00 [Note] [Entrypoint]: Stopping temporary server
+2021-10-19T18:44:17.977206Z 0 [Note] Giving 0 client threads a chance to die gracefully
+2021-10-19T18:44:17.977237Z 0 [Note] Shutting down slave threads
+2021-10-19T18:44:17.977256Z 0 [Note] Forcefully disconnecting 0 remaining clients
+2021-10-19T18:44:17.977274Z 0 [Note] Event Scheduler: Purging the queue. 0 events
+2021-10-19T18:44:17.977349Z 0 [Note] Binlog end
+2021-10-19T18:44:17.977910Z 0 [Note] Shutting down plugin 'ngram'
+2021-10-19T18:44:17.977956Z 0 [Note] Shutting down plugin 'partition'
+2021-10-19T18:44:17.977985Z 0 [Note] Shutting down plugin 'BLACKHOLE'
+2021-10-19T18:44:17.978042Z 0 [Note] Shutting down plugin 'ARCHIVE'
+2021-10-19T18:44:17.978057Z 0 [Note] Shutting down plugin 'PERFORMANCE_SCHEMA'
+2021-10-19T18:44:17.978105Z 0 [Note] Shutting down plugin 'MRG_MYISAM'
+2021-10-19T18:44:17.978121Z 0 [Note] Shutting down plugin 'MyISAM'
+2021-10-19T18:44:17.978142Z 0 [Note] Shutting down plugin 'INNODB_SYS_VIRTUAL'
+2021-10-19T18:44:17.978161Z 0 [Note] Shutting down plugin 'INNODB_SYS_DATAFILES'
+2021-10-19T18:44:17.978181Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLESPACES'
+2021-10-19T18:44:17.978199Z 0 [Note] Shutting down plugin 'INNODB_SYS_FOREIGN_COLS'
+2021-10-19T18:44:17.978219Z 0 [Note] Shutting down plugin 'INNODB_SYS_FOREIGN'
+2021-10-19T18:44:17.978224Z 0 [Note] Shutting down plugin 'INNODB_SYS_FIELDS'
+2021-10-19T18:44:17.978242Z 0 [Note] Shutting down plugin 'INNODB_SYS_COLUMNS'
+2021-10-19T18:44:17.978260Z 0 [Note] Shutting down plugin 'INNODB_SYS_INDEXES'
+2021-10-19T18:44:17.978265Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLESTATS'
+2021-10-19T18:44:17.978269Z 0 [Note] Shutting down plugin 'INNODB_SYS_TABLES'
+2021-10-19T18:44:17.978290Z 0 [Note] Shutting down plugin 'INNODB_FT_INDEX_TABLE'
+2021-10-19T18:44:17.978307Z 0 [Note] Shutting down plugin 'INNODB_FT_INDEX_CACHE'
+2021-10-19T18:44:17.978336Z 0 [Note] Shutting down plugin 'INNODB_FT_CONFIG'
+2021-10-19T18:44:17.978353Z 0 [Note] Shutting down plugin 'INNODB_FT_BEING_DELETED'
+2021-10-19T18:44:17.978372Z 0 [Note] Shutting down plugin 'INNODB_FT_DELETED'
+2021-10-19T18:44:17.978376Z 0 [Note] Shutting down plugin 'INNODB_FT_DEFAULT_STOPWORD'
+2021-10-19T18:44:17.978402Z 0 [Note] Shutting down plugin 'INNODB_METRICS'
+2021-10-19T18:44:17.978432Z 0 [Note] Shutting down plugin 'INNODB_TEMP_TABLE_INFO'
+2021-10-19T18:44:17.978452Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_POOL_STATS'
+2021-10-19T18:44:17.978472Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_PAGE_LRU'
+2021-10-19T18:44:17.978492Z 0 [Note] Shutting down plugin 'INNODB_BUFFER_PAGE'
+2021-10-19T18:44:17.978510Z 0 [Note] Shutting down plugin 'INNODB_CMP_PER_INDEX_RESET'
+2021-10-19T18:44:17.978516Z 0 [Note] Shutting down plugin 'INNODB_CMP_PER_INDEX'
+2021-10-19T18:44:17.978537Z 0 [Note] Shutting down plugin 'INNODB_CMPMEM_RESET'
+2021-10-19T18:44:17.978568Z 0 [Note] Shutting down plugin 'INNODB_CMPMEM'
+2021-10-19T18:44:17.978586Z 0 [Note] Shutting down plugin 'INNODB_CMP_RESET'
+2021-10-19T18:44:17.978613Z 0 [Note] Shutting down plugin 'INNODB_CMP'
+2021-10-19T18:44:17.978652Z 0 [Note] Shutting down plugin 'INNODB_LOCK_WAITS'
+2021-10-19T18:44:17.978656Z 0 [Note] Shutting down plugin 'INNODB_LOCKS'
+2021-10-19T18:44:17.978660Z 0 [Note] Shutting down plugin 'INNODB_TRX'
+2021-10-19T18:44:17.978662Z 0 [Note] Shutting down plugin 'InnoDB'
+2021-10-19T18:44:17.978759Z 0 [Note] InnoDB: FTS optimize thread exiting.
+2021-10-19T18:44:17.978870Z 0 [Note] InnoDB: Starting shutdown...
+2021-10-19T18:44:18.079539Z 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2021-10-19T18:44:18.080067Z 0 [Note] InnoDB: Buffer pool(s) dump completed at 211019 18:44:18
+2021-10-19T18:44:19.618162Z 0 [Note] InnoDB: Shutdown completed; log sequence number 12658916
+2021-10-19T18:44:19.619756Z 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2021-10-19T18:44:19.619786Z 0 [Note] Shutting down plugin 'MEMORY'
+2021-10-19T18:44:19.619791Z 0 [Note] Shutting down plugin 'CSV'
+2021-10-19T18:44:19.619794Z 0 [Note] Shutting down plugin 'sha256_password'
+2021-10-19T18:44:19.619795Z 0 [Note] Shutting down plugin 'mysql_native_password'
+2021-10-19T18:44:19.619997Z 0 [Note] Shutting down plugin 'binlog'
+2021-10-19T18:44:19.620783Z 0 [Note] mysqld: Shutdown complete
+
+2021-10-19 18:44:19+00:00 [Note] [Entrypoint]: Temporary server stopped
+
+2021-10-19 18:44:19+00:00 [Note] [Entrypoint]: MySQL init process done. Ready for start up.
+
+2021-10-19T18:44:20.142073Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2021-10-19T18:44:20.143119Z 0 [Note] mysqld (mysqld 5.7.35) starting as process 1 ...
+2021-10-19T18:44:20.145159Z 0 [Note] InnoDB: PUNCH HOLE support available
+2021-10-19T18:44:20.145186Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2021-10-19T18:44:20.145190Z 0 [Note] InnoDB: Uses event mutexes
+2021-10-19T18:44:20.145192Z 0 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+2021-10-19T18:44:20.145193Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2021-10-19T18:44:20.145195Z 0 [Note] InnoDB: Using Linux native AIO
+2021-10-19T18:44:20.146032Z 0 [Note] InnoDB: Number of pools: 1
+2021-10-19T18:44:20.146108Z 0 [Note] InnoDB: Using CPU crc32 instructions
+2021-10-19T18:44:20.147899Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2021-10-19T18:44:20.154886Z 0 [Note] InnoDB: Completed initialization of buffer pool
+2021-10-19T18:44:20.156836Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2021-10-19T18:44:20.169249Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+2021-10-19T18:44:20.185272Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2021-10-19T18:44:20.185331Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2021-10-19T18:44:20.199193Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2021-10-19T18:44:20.199640Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+2021-10-19T18:44:20.199662Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+2021-10-19T18:44:20.200679Z 0 [Note] InnoDB: 5.7.35 started; log sequence number 12658916
+2021-10-19T18:44:20.200825Z 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2021-10-19T18:44:20.201067Z 0 [Note] Plugin 'FEDERATED' is disabled.
+2021-10-19T18:44:20.203764Z 0 [Note] InnoDB: Buffer pool(s) load completed at 211019 18:44:20
+2021-10-19T18:44:20.205584Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+2021-10-19T18:44:20.205612Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+2021-10-19T18:44:20.205630Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:44:20.205645Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+2021-10-19T18:44:20.205968Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-10-19T18:44:20.206002Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+2021-10-19T18:44:20.206293Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+2021-10-19T18:44:20.206325Z 0 [Note] IPv6 is available.
+2021-10-19T18:44:20.206345Z 0 [Note]   - '::' resolves to '::';
+2021-10-19T18:44:20.206367Z 0 [Note] Server socket created on IP: '::'.
+2021-10-19T18:44:20.208175Z 0 [Warning] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2021-10-19T18:44:20.213372Z 0 [Note] Event Scheduler: Loaded 0 events
+2021-10-19T18:44:20.213587Z 0 [Note] mysqld: ready for connections.
+Version: '5.7.35'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+
+## COMPROBACION
+
+C:\Windows\system32>docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                               NAMES
+ffe31fac86d6   mysql:5.7.35   "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   33060/tcp, 0.0.0.0:3366->3306/tcp   hungry_booth
+
+
+## RUN JUPYTER WITH NETWORK
+
+C:\Windows\system32>docker run -p 8888:8888 --network my_another_network jupyter/base-notebook
+WARN: Jupyter Notebook deprecation notice https://github.com/jupyter/docker-stacks#jupyter-notebook-deprecation-notice.
+Executing the command: jupyter notebook
+[I 21:31:21.599 NotebookApp] Writing notebook server cookie secret to /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret
+[W 2021-10-19 21:31:22.046 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-10-19 21:31:22.046 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-10-19 21:31:22.046 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-10-19 21:31:22.046 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[I 2021-10-19 21:31:22.055 LabApp] JupyterLab extension loaded from /opt/conda/lib/python3.9/site-packages/jupyterlab
+[I 2021-10-19 21:31:22.055 LabApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 21:31:22.059 NotebookApp] Serving notebooks from local directory: /home/jovyan
+[I 21:31:22.059 NotebookApp] Jupyter Notebook 6.4.4 is running at:
+[I 21:31:22.060 NotebookApp] http://5f69aae7a1b2:8888/?token=5585fb2a486d706d546188449143d0c601d85a3016a95a29
+[I 21:31:22.060 NotebookApp]  or http://127.0.0.1:8888/?token=5585fb2a486d706d546188449143d0c601d85a3016a95a29
+[I 21:31:22.060 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 21:31:22.064 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///home/jovyan/.local/share/jupyter/runtime/nbserver-7-open.html
+    Or copy and paste one of these URLs:
+        http://5f69aae7a1b2:8888/?token=5585fb2a486d706d546188449143d0c601d85a3016a95a29
+     or http://127.0.0.1:8888/?token=5585fb2a486d706d546188449143d0c601d85a3016a95a29
+
+## TOKEN: http://127.0.0.1:8888/?token=5585fb2a486d706d546188449143d0c601d85a3016a95a29
+
+
+## REGISTRO DE LOS DOS CONTENEDORES JUPYTER-MYSQL
+
+C:\Windows\system32>docker ps
+CONTAINER ID   IMAGE                   COMMAND                  CREATED         STATUS         PORTS                               NAMES
+5f69aae7a1b2   jupyter/base-notebook   "tini -g -- start-no…"   4 minutes ago   Up 4 minutes   0.0.0.0:8888->8888/tcp              eloquent_robinson
+ffe31fac86d6   mysql:5.7.35            "docker-entrypoint.s…"   3 hours ago     Up 3 hours     33060/tcp, 0.0.0.0:3366->3306/tcp   hungry_booth
+
+
+## Inspeccionar los IP de las redes
+
+C:\Windows\system32>docker inspect network my_another_network
+[
+    {
+        "Name": "my_another_network",
+        "Id": "b837e3ca5a753b814293a153ed61a081867d0e015ec1f24939534d3cb5677a14",
+        "Created": "2021-10-19T18:24:34.6742338Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.19.0.0/16",
+                    "Gateway": "172.19.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "5f69aae7a1b273f724751366bea218f1204bdcfe172f2079414bd9e2d9ef2baa": {
+                "Name": "eloquent_robinson",
+                "EndpointID": "1bcb1275c4fc5197b475f4f7233b2e4a1d7bcbb4bd966e47b72f44ebfd1f63b0",
+                "MacAddress": "02:42:ac:13:00:03",
+                "IPv4Address": "172.19.0.3/16",
+                "IPv6Address": ""
+            },
+            "ffe31fac86d64b686b56075fbce03e8a9039baec02bf4c0c56a69a6a020bd947": {
+                "Name": "hungry_booth",
+                "EndpointID": "5ce23a4b5b9de94cde70ae18f8a3b152673a563c2e9302bfa5104fae1c29a4ad",
+                "MacAddress": "02:42:ac:13:00:02",
+                "IPv4Address": "172.19.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+Error: No such object: network
+
+
+## DOCKER COMPOSE
+Nos ayuda a faciliar el proceso de crear dos redes y hacer una conexion entre ellas
+
+C:\Windows\system32>docker-compose --version
+docker-compose version 1.29.2, build 5becea4c
+
+version: '3.7'
+
+services:
+
+  db:
+    image: mysql:5.7.35
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: test123
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test123
+        
+  jupyter:
+    image: jupyter/base-notebook
+    ports:
+      - 8888:8888
+
+volumes:
+  db_data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
